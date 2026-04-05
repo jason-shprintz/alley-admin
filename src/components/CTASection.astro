@@ -28,15 +28,17 @@
 
 <script>
 	// Simple form handling (client-side only for now)
-	const form = document.getElementById('notifyForm') as HTMLFormElement;
-	form?.addEventListener('submit', (e) => {
-		e.preventDefault();
-		const input = form.querySelector('input[type="email"]') as HTMLInputElement;
-		if (input?.value) {
-			alert("Thanks for signing up! We'll notify you when we launch. 🎳");
-			input.value = '';
-		}
-	});
+	const form = document.getElementById('notifyForm');
+	if (form instanceof HTMLFormElement) {
+		form.addEventListener('submit', (e) => {
+			e.preventDefault();
+			const input = form.querySelector('input[type="email"]');
+			if (input instanceof HTMLInputElement && input.value) {
+				alert("Thanks for signing up! We'll notify you when we launch. 🎳");
+				input.value = '';
+			}
+		});
+	}
 </script>
 
 <style>
