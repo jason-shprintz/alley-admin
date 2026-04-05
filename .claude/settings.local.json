@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install --save-dev typescript @types/node)",
+      "Bash(npm install --save-dev eslint eslint-plugin-astro @typescript-eslint/parser @typescript-eslint/eslint-plugin)",
+      "Bash(npm install --save-dev prettier prettier-plugin-astro eslint-config-prettier)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
