@@ -1,0 +1,104 @@
+---
+import BowlingIcon from "./BowlingIcon.astro";
+---
+
+<section class="hero">
+  <!-- Logo/Icon -->
+  <div class="icon-wrapper">
+    <BowlingIcon />
+  </div>
+
+  <!-- Coming Soon Badge - vintage style -->
+  <div class="badge">
+    <span class="badge-text">Opening Soon</span>
+  </div>
+
+  <!-- Main Heading with retro lettering -->
+  <h1 class="title">
+    <span class="title-main">Alley Admin</span>
+    <span class="title-tagline">League Management Reimagined</span>
+  </h1>
+</section>
+
+<style>
+  .hero {
+    text-align: center;
+  }
+
+  .icon-wrapper {
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  /* Vintage badge styling */
+  .badge {
+    display: inline-block;
+    margin-bottom: 2rem;
+    padding: 0.75rem 2rem;
+    background: linear-gradient(135deg, #d97706 0%, #ea580c 100%);
+    border: 3px solid #f59e0b;
+    border-radius: 4px;
+    box-shadow: 0 4px 0 #92400e, 0 8px 20px rgba(217, 119, 6, 0.4);
+  }
+
+  .badge-text {
+    color: #fef3c7;
+    font-size: 1rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Retro title styling */
+  .title {
+    margin: 0 0 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .title-main {
+    font-size: clamp(3.5rem, 10vw, 6rem);
+    font-weight: 800;
+    color: #f5f1e8;
+    text-shadow: 4px 4px 0 #d97706, 8px 8px 0 #ea580c,
+      12px 12px 20px rgba(0, 0, 0, 0.5);
+    letter-spacing: -0.02em;
+    line-height: 1.5;
+    display: block;
+  }
+
+  .title-tagline {
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    font-weight: 600;
+    color: #d4a574;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.2rem;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .badge {
+      padding: 0.625rem 1.5rem;
+    }
+
+    .badge-text {
+      font-size: 0.875rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .title-main {
+      text-shadow: 2px 2px 0 #d97706, 4px 4px 0 #ea580c,
+        6px 6px 12px rgba(0, 0, 0, 0.5);
+    }
+
+    .icon-wrapper {
+      margin-bottom: 1.5rem;
+    }
+  }
+</style>
