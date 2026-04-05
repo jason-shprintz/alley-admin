@@ -1,0 +1,64 @@
+---
+// Footer with retro styling
+const dateYear: string = new Date().getFullYear().toString();
+---
+
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-divider"></div>
+    <p>
+      &copy; {dateYear} Alley Admin • Crafted with care for bowling enthusiasts • A product of <a
+        href="https://toastbyte.studio">Toastbyte Studios</a
+      >
+    </p>
+  </div>
+</footer>
+
+<style>
+  /* Footer */
+  .footer {
+    position: relative;
+    width: 100%;
+    z-index: 10;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 50%, #000000 100%);
+    padding: 3rem 2rem 2rem;
+    margin-top: auto;
+  }
+
+  .footer-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .footer-divider {
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #d4a574, transparent);
+    margin: 0 auto 1.5rem;
+  }
+
+  .footer p {
+    color: #a78a6a;
+    font-size: 0.875rem;
+    margin: 0;
+    letter-spacing: 0.05em;
+  }
+
+  .footer a {
+    color: #d4a574;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border-bottom: 2px solid transparent;
+  }
+
+  .footer a:hover {
+    color: #ea580c;
+    border-bottom-color: #ea580c;
+  }
+
+  .footer a:active {
+    color: #d97706;
+  }
+</style>

@@ -1,11 +1,54 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Background from '../components/Background.astro';
+import Hero from '../components/Hero.astro';
+import Features from '../components/Features.astro';
+import CTASection from '../components/CTASection.astro';
+import Footer from '../components/Footer.astro';
 ---
 
 <Layout>
-  <Welcome />
+  <div class="container">
+    <Background />
+
+    <main class="content">
+      <Hero />
+      <Features />
+      <CTASection />
+    </main>
+
+    <Footer />
+  </div>
 </Layout>
+
+<style>
+  .container {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: linear-gradient(180deg, #1a1410 0%, #2d1f16 100%);
+  }
+
+  .content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 3rem 2rem;
+    max-width: 1000px;
+    width: 100%;
+    margin: auto;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .content {
+      padding: 2rem 1.5rem;
+    }
+  }
+</style>

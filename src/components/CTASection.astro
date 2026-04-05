@@ -1,0 +1,147 @@
+---
+// Call-to-action section with email signup form
+---
+
+<section class="cta-section">
+  <div class="cta-box">
+    <p class="cta-text">
+      <span class="strike-text">Strike!</span> Join the waitlist for the future of league management
+    </p>
+    <form class="notify-form" id="notifyForm">
+      <input
+        type="email"
+        placeholder="your.email@example.com"
+        aria-label="Email address"
+        required
+        class="email-input"
+      />
+      <button type="submit" class="submit-button"> Reserve Your Spot </button>
+    </form>
+    <p class="privacy-note">We'll notify you when lanes open. No spam, guaranteed.</p>
+  </div>
+</section>
+
+<script>
+  // Simple form handling (client-side only for now)
+  const form = document.getElementById('notifyForm');
+  if (form instanceof HTMLFormElement) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const input = form.querySelector('input[type="email"]');
+      if (input instanceof HTMLInputElement && input.value) {
+        alert("Thanks for signing up! We'll notify you when we launch. 🎳");
+        input.value = '';
+      }
+    });
+  }
+</script>
+
+<style>
+  /* CTA Section */
+  .cta-section {
+    margin-bottom: 4rem;
+  }
+
+  .cta-box {
+    background: rgba(45, 31, 22, 1);
+    border: 3px solid #d4a574;
+    border-radius: 12px;
+    padding: 3rem 2rem;
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow:
+      0 0 0 6px rgba(212, 165, 116, 0.1),
+      0 12px 40px rgba(0, 0, 0, 0.5);
+  }
+
+  .cta-text {
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    color: #f5f1e8;
+    margin: 0 0 2rem;
+    line-height: 1.5;
+  }
+
+  .strike-text {
+    color: #ea580c;
+    font-weight: 800;
+    font-size: 1.2em;
+    text-shadow: 2px 2px 4px rgba(234, 88, 12, 0.4);
+  }
+
+  .notify-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .email-input {
+    padding: 1rem 1.5rem;
+    background: rgba(26, 20, 16, 0.8);
+    border: 2px solid #d4a574;
+    border-radius: 6px;
+    color: #f5f1e8;
+    font-size: 1.125rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+  }
+
+  .email-input:focus {
+    outline: none;
+    border-color: #ea580c;
+    background: rgba(26, 20, 16, 0.95);
+    box-shadow:
+      0 0 0 3px rgba(234, 88, 12, 0.2),
+      0 4px 12px rgba(234, 88, 12, 0.3);
+  }
+
+  .email-input::placeholder {
+    color: #a78a6a;
+  }
+
+  .submit-button {
+    padding: 1.125rem 2.5rem;
+    background: linear-gradient(135deg, #d97706 0%, #ea580c 100%);
+    border: none;
+    border-radius: 6px;
+    color: #fef3c7;
+    font-size: 1.125rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow:
+      0 4px 0 #92400e,
+      0 8px 20px rgba(217, 119, 6, 0.4);
+    font-family: inherit;
+  }
+
+  .submit-button:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 6px 0 #92400e,
+      0 12px 30px rgba(217, 119, 6, 0.5);
+  }
+
+  .submit-button:active {
+    transform: translateY(2px);
+    box-shadow:
+      0 2px 0 #92400e,
+      0 4px 12px rgba(217, 119, 6, 0.3);
+  }
+
+  .privacy-note {
+    color: #a78a6a;
+    font-size: 0.875rem;
+    margin: 0;
+    font-style: italic;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .cta-box {
+      padding: 2rem 1.5rem;
+    }
+  }
+</style>
