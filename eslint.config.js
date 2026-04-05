@@ -1,6 +1,7 @@
 import eslintPluginAstro from 'eslint-plugin-astro';
 import tseslint from '@typescript-eslint/eslint-plugin';
 import tsparser from '@typescript-eslint/parser';
+import eslintConfigPrettier from 'eslint-config-prettier';
 
 export default [
   // Ignore patterns
@@ -39,4 +40,7 @@ export default [
       sourceType: 'module',
     },
   },
+
+  // Disable formatting rules that conflict with Prettier (must be last)
+  eslintConfigPrettier,
 ];
