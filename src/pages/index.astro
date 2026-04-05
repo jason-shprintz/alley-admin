@@ -1,451 +1,54 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import BowlingIcon from "../components/BowlingIcon.astro";
+import Layout from '../layouts/Layout.astro';
+import Background from '../components/Background.astro';
+import Hero from '../components/Hero.astro';
+import Features from '../components/Features.astro';
+import CTASection from '../components/CTASection.astro';
+import Footer from '../components/Footer.astro';
 ---
 
 <Layout>
-  <div class="container">
-    <!-- Retro wood paneling background -->
-    <div class="wood-paneling"></div>
+	<div class="container">
+		<Background />
 
-    <!-- Vintage dots pattern -->
-    <div class="dots-pattern"></div>
+		<main class="content">
+			<Hero />
+			<Features />
+			<CTASection />
+		</main>
 
-    <!-- Retro lanes with maple wood texture -->
-    <div class="bowling-lanes">
-      <div class="lane"></div>
-      <div class="lane"></div>
-      <div class="lane"></div>
-    </div>
-
-    <main class="content">
-      <!-- Logo/Icon -->
-      <div class="icon-wrapper">
-        <BowlingIcon />
-      </div>
-
-      <!-- Coming Soon Badge - vintage style -->
-      <div class="badge">
-        <span class="badge-text">Opening Soon</span>
-      </div>
-
-      <!-- Main Heading with retro lettering -->
-      <h1 class="title">
-        <span class="title-main">Alley Admin</span>
-        <span class="title-tagline">League Management Reimagined</span>
-      </h1>
-
-      <!-- Retro-style feature cards -->
-      <div class="features">
-        <div class="feature-card">
-          <div class="feature-number">01</div>
-          <h3>League Management</h3>
-          <p>Organize teams, schedules, and tournaments with ease</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-number">02</div>
-          <h3>Score Tracking</h3>
-          <p>Digital scorekeeping that's better than the old scoreboards</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-number">03</div>
-          <h3>Team Stats</h3>
-          <p>Track performance, averages, and league standings</p>
-        </div>
-      </div>
-
-      <!-- CTA Section with vintage flair -->
-      <div class="cta-section">
-        <div class="cta-box">
-          <p class="cta-text">
-            <span class="strike-text">Strike!</span> Join the waitlist for the future
-            of league management
-          </p>
-          <form class="notify-form" id="notifyForm">
-            <input
-              type="email"
-              placeholder="your.email@example.com"
-              aria-label="Email address"
-              required
-              class="email-input"
-            />
-            <button type="submit" class="submit-button">
-              Reserve Your Spot
-            </button>
-          </form>
-          <p class="privacy-note">
-            We'll notify you when lanes open. No spam, guaranteed.
-          </p>
-        </div>
-      </div>
-
-      <!-- Footer with retro styling -->
-      <footer class="footer">
-        <div class="footer-divider"></div>
-        <p>
-          &copy; 2026 Alley Admin • Crafted with care for bowling enthusiasts
-        </p>
-      </footer>
-    </main>
-  </div>
+		<Footer />
+	</div>
 </Layout>
 
-<script>
-  // Simple form handling (client-side only for now)
-  const form = document.getElementById("notifyForm") as HTMLFormElement;
-  form?.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const input = form.querySelector('input[type="email"]') as HTMLInputElement;
-    if (input?.value) {
-      alert("Thanks for signing up! We'll notify you when we launch. 🎳");
-      input.value = "";
-    }
-  });
-</script>
-
 <style>
-  .container {
-    position: relative;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    background: linear-gradient(180deg, #1a1410 0%, #2d1f16 100%);
-  }
+	.container {
+		position: relative;
+		min-height: 100vh;
+		display: flex;
+		flex-direction: column;
+		overflow: hidden;
+		background: linear-gradient(180deg, #1a1410 0%, #2d1f16 100%);
+	}
 
-  /* Retro wood paneling texture */
-  .wood-paneling {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: repeating-linear-gradient(
-      90deg,
-      rgba(101, 67, 33, 0.03) 0px,
-      rgba(101, 67, 33, 0.03) 2px,
-      transparent 2px,
-      transparent 50px
-    );
-    opacity: 0.4;
-  }
+	.content {
+		position: relative;
+		z-index: 10;
+		text-align: center;
+		padding: 3rem 2rem;
+		max-width: 1000px;
+		width: 100%;
+		margin: auto;
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
 
-  /* Vintage dots pattern */
-  .dots-pattern {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: radial-gradient(
-      circle,
-      rgba(212, 165, 116, 0.05) 1px,
-      transparent 1px
-    );
-    background-size: 30px 30px;
-  }
-
-  /* Bowling lanes with maple wood look */
-  .bowling-lanes {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    gap: 20px;
-    padding: 0 5%;
-    opacity: 0.3;
-    z-index: 1;
-  }
-
-  .lane {
-    flex: 1;
-    background: linear-gradient(
-      180deg,
-      rgba(212, 165, 116, 0.2) 0%,
-      rgba(212, 165, 116, 0.1) 50%,
-      rgba(212, 165, 116, 0.2) 100%
-    );
-    border-left: 1px solid rgba(212, 165, 116, 0.3);
-    border-right: 1px solid rgba(212, 165, 116, 0.3);
-  }
-
-  .content {
-    position: relative;
-    z-index: 10;
-    text-align: center;
-    padding: 3rem 2rem;
-    max-width: 1000px;
-    width: 100%;
-  }
-
-  .icon-wrapper {
-    margin-bottom: 2rem;
-    display: flex;
-    justify-content: center;
-  }
-
-  /* Vintage badge styling */
-  .badge {
-    display: inline-block;
-    margin-bottom: 2rem;
-    padding: 0.75rem 2rem;
-    background: linear-gradient(135deg, #d97706 0%, #ea580c 100%);
-    border: 3px solid #f59e0b;
-    border-radius: 4px;
-    box-shadow: 0 4px 0 #92400e, 0 8px 20px rgba(217, 119, 6, 0.4);
-  }
-
-  .badge-text {
-    color: #fef3c7;
-    font-size: 1rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  }
-
-  /* Retro title styling */
-  .title {
-    margin: 0 0 3rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .title-main {
-    font-size: clamp(3.5rem, 10vw, 6rem);
-    font-weight: 800;
-    color: #f5f1e8;
-    text-shadow: 4px 4px 0 #d97706, 8px 8px 0 #ea580c,
-      12px 12px 20px rgba(0, 0, 0, 0.5);
-    letter-spacing: -0.02em;
-    line-height: 1.5;
-    display: block;
-  }
-
-  .title-tagline {
-    font-size: clamp(1rem, 3vw, 1.5rem);
-    font-weight: 600;
-    color: #d4a574;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    display: block;
-  }
-
-  /* Retro feature cards */
-  .features {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-bottom: 4rem;
-    padding: 0 1rem;
-  }
-
-  .feature-card {
-    background: rgba(45, 31, 22, 0.6);
-    border: 2px solid #d4a574;
-    border-radius: 8px;
-    padding: 2rem 1.5rem;
-    position: relative;
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  }
-
-  .feature-card:hover {
-    transform: translateY(-4px);
-    border-color: #ea580c;
-    box-shadow: 0 8px 24px rgba(234, 88, 12, 0.3),
-      0 0 0 4px rgba(234, 88, 12, 0.1);
-  }
-
-  .feature-number {
-    position: absolute;
-    top: -1rem;
-    right: 1rem;
-    width: 3rem;
-    height: 3rem;
-    background: linear-gradient(135deg, #d97706 0%, #ea580c 100%);
-    border: 3px solid #2d1f16;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.25rem;
-    font-weight: 800;
-    color: #fef3c7;
-    box-shadow: 0 4px 12px rgba(217, 119, 6, 0.4);
-  }
-
-  .feature-card h3 {
-    color: #f5f1e8;
-    font-size: 1.5rem;
-    margin: 0 0 0.75rem;
-    font-weight: 700;
-  }
-
-  .feature-card p {
-    color: #d4a574;
-    margin: 0;
-    line-height: 1.6;
-  }
-
-  /* CTA Section */
-  .cta-section {
-    margin-bottom: 4rem;
-  }
-
-  .cta-box {
-    background: rgba(45, 31, 22, 1);
-    border: 3px solid #d4a574;
-    border-radius: 12px;
-    padding: 3rem 2rem;
-    max-width: 600px;
-    margin: 0 auto;
-    box-shadow: 0 0 0 6px rgba(212, 165, 116, 0.1),
-      0 12px 40px rgba(0, 0, 0, 0.5);
-  }
-
-  .cta-text {
-    font-size: clamp(1.25rem, 3vw, 1.5rem);
-    color: #f5f1e8;
-    margin: 0 0 2rem;
-    line-height: 1.5;
-  }
-
-  .strike-text {
-    color: #ea580c;
-    font-weight: 800;
-    font-size: 1.2em;
-    text-shadow: 2px 2px 4px rgba(234, 88, 12, 0.4);
-  }
-
-  .notify-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-bottom: 1rem;
-  }
-
-  .email-input {
-    padding: 1rem 1.5rem;
-    background: rgba(26, 20, 16, 0.8);
-    border: 2px solid #d4a574;
-    border-radius: 6px;
-    color: #f5f1e8;
-    font-size: 1.125rem;
-    font-family: inherit;
-    transition: all 0.3s ease;
-  }
-
-  .email-input:focus {
-    outline: none;
-    border-color: #ea580c;
-    background: rgba(26, 20, 16, 0.95);
-    box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.2),
-      0 4px 12px rgba(234, 88, 12, 0.3);
-  }
-
-  .email-input::placeholder {
-    color: #a78a6a;
-  }
-
-  .submit-button {
-    padding: 1.125rem 2.5rem;
-    background: linear-gradient(135deg, #d97706 0%, #ea580c 100%);
-    border: none;
-    border-radius: 6px;
-    color: #fef3c7;
-    font-size: 1.125rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 0 #92400e, 0 8px 20px rgba(217, 119, 6, 0.4);
-    font-family: inherit;
-  }
-
-  .submit-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 0 #92400e, 0 12px 30px rgba(217, 119, 6, 0.5);
-  }
-
-  .submit-button:active {
-    transform: translateY(2px);
-    box-shadow: 0 2px 0 #92400e, 0 4px 12px rgba(217, 119, 6, 0.3);
-  }
-
-  .privacy-note {
-    color: #a78a6a;
-    font-size: 0.875rem;
-    margin: 0;
-    font-style: italic;
-  }
-
-  /* Footer */
-  .footer {
-    padding-top: 3rem;
-    color: #a78a6a;
-    font-size: 0.875rem;
-  }
-
-  .footer-divider {
-    width: 100px;
-    height: 3px;
-    background: linear-gradient(90deg, transparent, #d4a574, transparent);
-    margin: 0 auto 1.5rem;
-  }
-
-  .footer p {
-    margin: 0;
-    letter-spacing: 0.05em;
-  }
-
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .content {
-      padding: 2rem 1.5rem;
-    }
-
-    .features {
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
-    }
-
-    .cta-box {
-      padding: 2rem 1.5rem;
-    }
-
-    .badge {
-      padding: 0.625rem 1.5rem;
-    }
-
-    .badge-text {
-      font-size: 0.875rem;
-    }
-
-    .bowling-lanes {
-      gap: 10px;
-      height: 40px;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .title-main {
-      text-shadow: 2px 2px 0 #d97706, 4px 4px 0 #ea580c,
-        6px 6px 12px rgba(0, 0, 0, 0.5);
-    }
-
-    .icon-wrapper {
-      margin-bottom: 1.5rem;
-    }
-
-    .feature-card {
-      padding: 1.75rem 1.25rem;
-    }
-  }
+	/* Responsive Design */
+	@media (max-width: 768px) {
+		.content {
+			padding: 2rem 1.5rem;
+		}
+	}
 </style>
