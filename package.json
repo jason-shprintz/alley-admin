@@ -9,6 +9,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "clean:appledouble": "find . -type f -name '._*' -delete",
     "astro": "astro"
   },
   "dependencies": {
