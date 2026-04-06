@@ -2,25 +2,51 @@
 // Retro-style feature cards showcasing product features
 ---
 
-<section class="features">
-  <div class="feature-card">
-    <div class="feature-number">01</div>
+<section class="features" aria-labelledby="features-heading">
+  <h2 id="features-heading" class="visually-hidden">Key Features</h2>
+
+  <article class="feature-card">
+    <div class="feature-number" aria-hidden="true">01</div>
     <h3>League Management</h3>
-    <p>Organize teams, schedules, and tournaments with ease</p>
-  </div>
-  <div class="feature-card">
-    <div class="feature-number">02</div>
+    <p>
+      Organize teams, schedules, and tournaments with ease. Complete league administration tools for
+      bowling alley managers and league coordinators.
+    </p>
+  </article>
+
+  <article class="feature-card">
+    <div class="feature-number" aria-hidden="true">02</div>
     <h3>Score Tracking</h3>
-    <p>Digital scorekeeping that's better than the old scoreboards</p>
-  </div>
-  <div class="feature-card">
-    <div class="feature-number">03</div>
-    <h3>Team Stats</h3>
-    <p>Track performance, averages, and league standings</p>
-  </div>
+    <p>
+      Digital scorekeeping that's better than the old scoreboards. Real-time score updates and
+      automatic handicap calculations.
+    </p>
+  </article>
+
+  <article class="feature-card">
+    <div class="feature-number" aria-hidden="true">03</div>
+    <h3>Team Statistics</h3>
+    <p>
+      Track performance, averages, and league standings. Comprehensive analytics and reporting for
+      bowlers and teams.
+    </p>
+  </article>
 </section>
 
 <style>
+  /* Screen reader only content */
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
   /* Retro feature cards */
   .features {
     display: grid;

@@ -2,12 +2,81 @@
 interface Props {
   title?: string;
   description?: string;
+  keywords?: string;
+  ogImage?: string;
+  canonical?: string;
 }
 
 const {
-  title = 'Alley Admin - Coming Soon',
-  description = 'Professional bowling league management software. Strike! Your league administration just got easier.',
+  title = 'Alley Admin - Coming Soon | Professional Bowling League Management Software',
+  description = 'Professional bowling league management software. Strike! Your league administration just got easier. Manage teams, track scores, and organize tournaments effortlessly.',
+  keywords = 'bowling league management, bowling software, league management system, bowling scores, team management, bowling statistics, sports league software, bowling alley software',
+  ogImage = '/favicon.svg',
+  canonical,
 } = Astro.props as Props;
+
+if (!Astro.site) {
+  throw new Error(
+    'Astro.site must be configured to generate canonical and social metadata URLs. Set `site` in astro.config.mjs.',
+  );
+}
+
+const siteUrl = Astro.site;
+const canonicalUrl = canonical || Astro.url.pathname;
+const fullCanonicalUrl = new URL(canonicalUrl, siteUrl).href;
+const fullOgImageUrl = new URL(ogImage, siteUrl).href;
+
+// Structured Data for AEO (AI Engine Optimization)
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'Alley Admin',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  description: description,
+  url: siteUrl.href,
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '5',
+    ratingCount: '1',
+  },
+  featureList: [
+    'League Management',
+    'Score Tracking',
+    'Team Statistics',
+    'Tournament Organization',
+    'Digital Scorekeeping',
+    'Performance Analytics',
+  ],
+};
+
+const organizationData = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Alley Admin',
+  url: siteUrl.href,
+  logo: new URL('/favicon.svg', siteUrl).href,
+  sameAs: [],
+  description:
+    'Alley Admin provides professional bowling league management software for bowling alleys, leagues, and tournaments.',
+};
+
+/**
+ * Safely serialize an object to a JSON-LD string for use with `set:html`.
+ * Escapes `<`, `>`, and `&` to their Unicode equivalents to prevent a
+ * malicious value from breaking out of the `<script>` tag and injecting HTML.
+ */
+function safeJsonLd(data: object): string {
+  return JSON.stringify(data)
+    .replace(/</g, '\\u003c')
+    .replace(/>/g, '\\u003e')
+    .replace(/&/g, '\\u0026');
+}
 ---
 
 <!doctype html>
@@ -15,17 +84,45 @@ const {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
     <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content="Alley Admin" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English" />
+    <meta name="revisit-after" content="7 days" />
     <meta name="generator" content={Astro.generator} />
 
-    <!-- Open Graph / Social Media -->
+    <!-- Canonical URL -->
+    <link rel="canonical" href={fullCanonicalUrl} />
+
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={fullCanonicalUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
+    <meta property="og:image" content={fullOgImageUrl} />
+    <meta property="og:site_name" content="Alley Admin" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={fullCanonicalUrl} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={fullOgImageUrl} />
+
+    <!-- Structured Data (JSON-LD) for AEO -->
+    <script type="application/ld+json" set:html={safeJsonLd(structuredData)} />
+    <script type="application/ld+json" set:html={safeJsonLd(organizationData)} />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
     <!-- Preload fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -35,7 +132,8 @@ const {
       rel="stylesheet"
     />
 
-    <title>{title}</title>
+    <!-- Sitemap -->
+    <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
   </head>
   <body>
     <slot />
