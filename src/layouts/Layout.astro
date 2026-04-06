@@ -11,11 +11,15 @@ const {
   title = 'Alley Admin - Coming Soon | Professional Bowling League Management Software',
   description = 'Professional bowling league management software. Strike! Your league administration just got easier. Manage teams, track scores, and organize tournaments effortlessly.',
   keywords = 'bowling league management, bowling software, league management system, bowling scores, team management, bowling statistics, sports league software, bowling alley software',
-  ogImage = '/og-image.jpg',
+  ogImage = '/favicon.svg',
   canonical,
 } = Astro.props as Props;
 
-const siteUrl = 'https://alley-admin.com';
+if (!Astro.site) {
+  throw new Error('Astro.site must be configured to generate canonical and social metadata URLs.');
+}
+
+const siteUrl = Astro.site;
 const canonicalUrl = canonical || Astro.url.pathname;
 const fullCanonicalUrl = new URL(canonicalUrl, siteUrl).href;
 const fullOgImageUrl = new URL(ogImage, siteUrl).href;
@@ -28,7 +32,7 @@ const structuredData = {
   applicationCategory: 'BusinessApplication',
   operatingSystem: 'Web',
   description: description,
-  url: siteUrl,
+  url: siteUrl.href,
   offers: {
     '@type': 'Offer',
     price: '0',
@@ -53,12 +57,20 @@ const organizationData = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: 'Alley Admin',
-  url: siteUrl,
+  url: siteUrl.href,
   logo: new URL('/favicon.svg', siteUrl).href,
   sameAs: [],
   description:
     'Alley Admin provides professional bowling league management software for bowling alleys, leagues, and tournaments.',
 };
+
+// Safely serialize JSON-LD: escape characters that could break </script> tag parsing
+function safeJsonLd(data: object): string {
+  return JSON.stringify(data)
+    .replace(/</g, '\\u003c')
+    .replace(/>/g, '\\u003e')
+    .replace(/&/g, '\\u0026');
+}
 ---
 
 <!doctype html>
@@ -98,8 +110,8 @@ const organizationData = {
     <meta name="twitter:image" content={fullOgImageUrl} />
 
     <!-- Structured Data (JSON-LD) for AEO -->
-    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
-    <script type="application/ld+json" set:html={JSON.stringify(organizationData)} />
+    <script type="application/ld+json" set:html={safeJsonLd(structuredData)} />
+    <script type="application/ld+json" set:html={safeJsonLd(organizationData)} />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
