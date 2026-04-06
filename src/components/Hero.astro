@@ -2,22 +2,27 @@
 import BowlingIcon from './BowlingIcon.astro';
 ---
 
-<section class="hero">
+<section class="hero" aria-labelledby="hero-title">
   <!-- Logo/Icon -->
-  <div class="icon-wrapper">
+  <div class="icon-wrapper" role="img" aria-label="Alley Admin bowling logo">
     <BowlingIcon />
   </div>
 
   <!-- Coming Soon Badge - vintage style -->
-  <div class="badge">
+  <div class="badge" role="status" aria-live="polite">
     <span class="badge-text">Opening Soon</span>
   </div>
 
   <!-- Main Heading with retro lettering -->
-  <h1 class="title">
+  <h1 id="hero-title" class="title">
     <span class="title-main">Alley Admin</span>
     <span class="title-tagline">League Management Reimagined</span>
   </h1>
+
+  <p class="hero-description">
+    Professional bowling league management software designed to streamline your league operations,
+    track scores digitally, and provide comprehensive team statistics and performance analytics.
+  </p>
 </section>
 
 <style>
@@ -82,6 +87,14 @@ import BowlingIcon from './BowlingIcon.astro';
     text-transform: uppercase;
     display: block;
     margin-bottom: 0.2rem;
+  }
+
+  .hero-description {
+    max-width: 700px;
+    margin: 0 auto 2rem;
+    font-size: clamp(1rem, 2vw, 1.125rem);
+    line-height: 1.6;
+    color: #d4a574;
   }
 
   /* Responsive Design */
