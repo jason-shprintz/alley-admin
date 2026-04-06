@@ -16,7 +16,9 @@ const {
 } = Astro.props as Props;
 
 if (!Astro.site) {
-  throw new Error('Astro.site must be configured to generate canonical and social metadata URLs.');
+  throw new Error(
+    'Astro.site must be configured to generate canonical and social metadata URLs. Set `site` in astro.config.mjs.',
+  );
 }
 
 const siteUrl = Astro.site;
@@ -64,7 +66,11 @@ const organizationData = {
     'Alley Admin provides professional bowling league management software for bowling alleys, leagues, and tournaments.',
 };
 
-// Safely serialize JSON-LD: escape characters that could break </script> tag parsing
+/**
+ * Safely serialize an object to a JSON-LD string for use with `set:html`.
+ * Escapes `<`, `>`, and `&` to their Unicode equivalents to prevent a
+ * malicious value from breaking out of the `<script>` tag and injecting HTML.
+ */
 function safeJsonLd(data: object): string {
   return JSON.stringify(data)
     .replace(/</g, '\\u003c')
