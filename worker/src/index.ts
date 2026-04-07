@@ -34,7 +34,7 @@ export default {
 
     let email: string;
     try {
-      const body = await request.json() as { email?: string };
+      const body = (await request.json()) as { email?: string };
       email = (body.email ?? '').trim().toLowerCase();
     } catch {
       return new Response(JSON.stringify({ error: 'Invalid JSON' }), {
@@ -51,9 +51,9 @@ export default {
     }
 
     try {
-      await env.DB.prepare(
-        'INSERT OR IGNORE INTO registrations (email) VALUES (?)'
-      ).bind(email).run();
+      await env.DB.prepare('INSERT OR IGNORE INTO registrations (email) VALUES (?)')
+        .bind(email)
+        .run();
     } catch {
       return new Response(JSON.stringify({ error: 'Internal server error' }), {
         status: 500,
