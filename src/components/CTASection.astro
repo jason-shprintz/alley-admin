@@ -15,22 +15,51 @@
         required
         class="email-input"
       />
-      <button type="submit" class="submit-button"> Reserve Your Spot </button>
+      <button type="submit" class="submit-button" id="submitButton"> Reserve Your Spot </button>
     </form>
-    <p class="privacy-note">We'll notify you when lanes open. No spam, guaranteed.</p>
+    <p class="privacy-note" id="formMessage">We'll notify you when lanes open. No spam, guaranteed.</p>
   </div>
 </section>
 
 <script>
-  // Simple form handling (client-side only for now)
   const form = document.getElementById('notifyForm');
-  if (form instanceof HTMLFormElement) {
-    form.addEventListener('submit', (e) => {
+  const submitButton = document.getElementById('submitButton');
+  const formMessage = document.getElementById('formMessage');
+
+  if (form instanceof HTMLFormElement && submitButton instanceof HTMLButtonElement && formMessage instanceof HTMLParagraphElement) {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const input = form.querySelector('input[type="email"]');
-      if (input instanceof HTMLInputElement && input.value) {
-        alert("Thanks for signing up! We'll notify you when we launch. 🎳");
-        input.value = '';
+      if (!(input instanceof HTMLInputElement) || !input.value) return;
+
+      submitButton.disabled = true;
+      submitButton.textContent = 'Reserving...';
+
+      try {
+        const response = await fetch('https://alleyadmin-registration-worker.jshprintz.workers.dev', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: input.value }),
+        });
+
+        if (response.ok) {
+          form.style.display = 'none';
+          formMessage.textContent = "You're on the list! We'll notify you when we launch. 🎳";
+          formMessage.style.color = '#d4a574';
+          formMessage.style.fontSize = '1rem';
+        } else if (response.status === 409) {
+          formMessage.textContent = "You're already on the list!";
+          formMessage.style.color = '#d4a574';
+          submitButton.disabled = false;
+          submitButton.textContent = 'Reserve Your Spot';
+        } else {
+          throw new Error('Server error');
+        }
+      } catch {
+        formMessage.textContent = 'Something went wrong. Please try again.';
+        formMessage.style.color = '#ea580c';
+        submitButton.disabled = false;
+        submitButton.textContent = 'Reserve Your Spot';
       }
     });
   }
@@ -117,18 +146,23 @@
     font-family: inherit;
   }
 
-  .submit-button:hover {
+  .submit-button:hover:not(:disabled) {
     transform: translateY(-2px);
     box-shadow:
       0 6px 0 #92400e,
       0 12px 30px rgba(217, 119, 6, 0.5);
   }
 
-  .submit-button:active {
+  .submit-button:active:not(:disabled) {
     transform: translateY(2px);
     box-shadow:
       0 2px 0 #92400e,
       0 4px 12px rgba(217, 119, 6, 0.3);
+  }
+
+  .submit-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
   }
 
   .privacy-note {
