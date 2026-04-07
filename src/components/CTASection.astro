@@ -36,27 +36,40 @@
       submitButton.textContent = 'Reserving...';
 
       try {
-        const response = await fetch('https://alleyadmin-registration-worker.jshprintz.workers.dev', {
+        const workerUrl = import.meta.env.PUBLIC_WORKER_URL ?? 'https://alleyadmin-registration-worker.jshprintz.workers.dev';
+        const response = await fetch(workerUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email: input.value }),
         });
+
+        let serverMessage = '';
+        if (!response.ok) {
+          try {
+            const errorBody = await response.json();
+            if (
+              errorBody &&
+              typeof errorBody === 'object' &&
+              'error' in errorBody &&
+              typeof errorBody.error === 'string'
+            ) {
+              serverMessage = errorBody.error;
+            }
+          } catch {
+            // Ignore JSON parsing failures and fall back to generic messaging.
+          }
+        }
 
         if (response.ok) {
           form.style.display = 'none';
           formMessage.textContent = "You're on the list! We'll notify you when we launch. 🎳";
           formMessage.style.color = '#d4a574';
           formMessage.style.fontSize = '1rem';
-        } else if (response.status === 409) {
-          formMessage.textContent = "You're already on the list!";
-          formMessage.style.color = '#d4a574';
-          submitButton.disabled = false;
-          submitButton.textContent = 'Reserve Your Spot';
         } else {
-          throw new Error('Server error');
+          throw new Error(serverMessage || 'Something went wrong. Please try again.');
         }
-      } catch {
-        formMessage.textContent = 'Something went wrong. Please try again.';
+      } catch (error) {
+        formMessage.textContent = error instanceof Error ? error.message : 'Something went wrong. Please try again.';
         formMessage.style.color = '#ea580c';
         submitButton.disabled = false;
         submitButton.textContent = 'Reserve Your Spot';
