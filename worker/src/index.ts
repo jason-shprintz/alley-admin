@@ -23,7 +23,7 @@ export default {
 
     let email: string;
     try {
-      const body = await request.json() as { email?: string };
+      const body = (await request.json()) as { email?: string };
       email = (body.email ?? '').trim().toLowerCase();
     } catch {
       return new Response(JSON.stringify({ error: 'Invalid JSON' }), {
@@ -40,9 +40,7 @@ export default {
     }
 
     try {
-      await env.DB.prepare(
-        'INSERT INTO registrations (email) VALUES (?)'
-      ).bind(email).run();
+      await env.DB.prepare('INSERT INTO registrations (email) VALUES (?)').bind(email).run();
     } catch (e: unknown) {
       const err = e as { message?: string };
       if (err.message?.includes('UNIQUE constraint failed')) {
