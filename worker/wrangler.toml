@@ -1,0 +1,8 @@
+name = "alleyadmin-registration-worker"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "alleyadmin-registrations"
+database_id = "f758cfc5-f019-4ff2-82dd-aff5fb817663"
