@@ -11,7 +11,7 @@ const {
   title = 'Alley Admin - Coming Soon | Professional Bowling League Management Software',
   description = 'Professional bowling league management software. Strike! Your league administration just got easier. Manage teams, track scores, and organize tournaments effortlessly.',
   keywords = 'bowling league management, bowling software, league management system, bowling scores, team management, bowling statistics, sports league software, bowling alley software',
-  ogImage = '/favicon.svg',
+  ogImage = '/og-image.png',
   canonical,
 } = Astro.props as Props;
 
@@ -40,11 +40,17 @@ const structuredData = {
     price: '0',
     priceCurrency: 'USD',
   },
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: '5',
-    ratingCount: '1',
+  author: {
+    '@type': 'Person',
+    name: 'Jason Shprintz',
+    url: 'https://jasonshprintz.com',
   },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Alley Admin',
+    url: 'https://alley-admin.com',
+  },
+  screenshot: 'https://alley-admin.com/og-image.png',
   featureList: [
     'League Management',
     'Score Tracking',
@@ -61,7 +67,7 @@ const organizationData = {
   name: 'Alley Admin',
   url: siteUrl.href,
   logo: new URL('/favicon.svg', siteUrl).href,
-  sameAs: [],
+  sameAs: ['https://github.com/jason-shprintz', 'https://jasonshprintz.com'],
   description:
     'Alley Admin provides professional bowling league management software for bowling alleys, leagues, and tournaments.',
 };
@@ -93,7 +99,7 @@ function safeJsonLd(data: object): string {
     <meta name="author" content="Alley Admin" />
     <meta name="robots" content="index, follow" />
     <meta name="language" content="English" />
-    <meta name="revisit-after" content="7 days" />
+    <meta name="theme-color" content="#d97706" />
     <meta name="generator" content={Astro.generator} />
 
     <!-- Canonical URL -->
@@ -105,6 +111,13 @@ function safeJsonLd(data: object): string {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={fullOgImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Alley Admin — Professional Bowling League Management Software"
+    />
+    <meta property="og:image:type" content="image/png" />
     <meta property="og:site_name" content="Alley Admin" />
     <meta property="og:locale" content="en_US" />
 
@@ -114,6 +127,10 @@ function safeJsonLd(data: object): string {
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={fullOgImageUrl} />
+    <meta
+      name="twitter:image:alt"
+      content="Alley Admin — Professional Bowling League Management Software"
+    />
 
     <!-- Structured Data (JSON-LD) for AEO -->
     <script type="application/ld+json" set:html={safeJsonLd(structuredData)} />
@@ -123,14 +140,23 @@ function safeJsonLd(data: object): string {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
 
-    <!-- Preload fonts -->
+    <!-- Fonts (async load to avoid render-blocking) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      rel="preload"
+      as="style"
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
-      rel="stylesheet"
+      onload="this.onload=null;this.rel='stylesheet'"
     />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
+      />
+    </noscript>
 
     <!-- Sitemap -->
     <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
