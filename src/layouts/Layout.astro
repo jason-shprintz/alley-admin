@@ -160,6 +160,13 @@ function safeJsonLd(data: object): string {
 
     <!-- Sitemap -->
     <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
+
+    <!-- Prevent PWA install prompt -->
+    <script>
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+      });
+    </script>
   </head>
   <body>
     <slot />
