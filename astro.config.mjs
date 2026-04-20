@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://alley-admin.com',
+  site: 'https://alleyadmin.app',
   compressHTML: true,
   integrations: [
     sitemap({
