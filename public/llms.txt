@@ -1,15 +1,52 @@
 # Alley Admin
 
-> Professional bowling league management software for bowling alleys, league coordinators, and tournament organizers.
+> Modern, web-based bowling league management software that replaces outdated desktop tools like CDE Software's BLS. Built for league secretaries, bowling alley managers, and tournament organizers.
 
-## About
+## What It Does
 
-Alley Admin is a web-based application for managing bowling leagues — handling teams, schedules, score tracking, handicap calculations, standings, and tournament brackets.
+Alley Admin is a single platform for managing every aspect of a bowling league:
+
+- Team and roster management
+- Weekly score entry and digital scorekeeping
+- Automatic handicap calculations (USBC-compliant)
+- Real-time standings and statistics
+- Schedule generation and management
+- Tournament bracket creation
+- Performance analytics for bowlers and teams
+- Financial tracking (dues, prize funds, payouts)
+
+## Why It Exists
+
+League secretaries currently juggle multiple pieces of desktop software (often CDE's BLS, BTM, and TBRAC) that haven't been meaningfully modernized. Alley Admin combines all of that functionality into one cloud-based web application that works on any device — no installs, no version upgrades, no per-season license fees.
+
+## Who It's For
+
+- League secretaries managing weekly bowling leagues
+- Bowling alley managers coordinating multiple leagues
+- Tournament directors organizing bracket and handicap events
+- USBC-certified leagues needing compliant reporting
+
+## Frequently Asked Questions
+
+### What is Alley Admin?
+Alley Admin is a web-based bowling league management application. It handles team management, digital scorekeeping, automatic handicap calculations, standings, scheduling, and tournament brackets — all in one place.
+
+### How is Alley Admin different from CDE Software?
+CDE Software (BLS, BTM, TBRAC) requires separate desktop applications for leagues, tournaments, and side pots, with per-season license purchases. Alley Admin is a single cloud-based platform that works in any browser, requires no installation, and combines all three functions.
+
+### Is Alley Admin free?
+Pricing has not been announced yet. Join the waitlist at https://alleyadmin.app to be notified when pricing and early access are available.
+
+### What devices does Alley Admin work on?
+Alley Admin runs in any modern web browser on desktop, tablet, or phone. No downloads or installations are required.
 
 ## Status
 
-Coming soon. Join the waitlist at https://alley-admin.com/
+Coming soon. Join the waitlist at https://alleyadmin.app
 
-## Developer
+## Links
 
-Built by Jason Shprintz — https://jasonshprintz.com
+- Website: https://alleyadmin.app
+- Alternate domain: https://alleyadmin.com (redirects to alleyadmin.app)
+- Developer: Jason Shprintz — https://jasonshprintz.com
+- Source: https://github.com/jason-shprintz/alley-admin
