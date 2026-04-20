@@ -10,7 +10,7 @@ interface Props {
 const {
   title = 'Alley Admin - Coming Soon | Professional Bowling League Management Software',
   description = 'Professional bowling league management software. Strike! Your league administration just got easier. Manage teams, track scores, and organize tournaments effortlessly.',
-  keywords = 'bowling league management, bowling software, league management system, bowling scores, team management, bowling statistics, sports league software, bowling alley software',
+  keywords = 'bowling league management, bowling software, league management system, bowling scores, team management, bowling statistics, sports league software, bowling alley software, bowling league secretary, CDE software alternative',
   ogImage = '/og-image.png',
   canonical,
 } = Astro.props as Props;
@@ -35,11 +35,6 @@ const structuredData = {
   operatingSystem: 'Web',
   description: description,
   url: siteUrl.href,
-  offers: {
-    '@type': 'Offer',
-    price: '0',
-    priceCurrency: 'USD',
-  },
   author: {
     '@type': 'Person',
     name: 'Jason Shprintz',
@@ -58,6 +53,9 @@ const structuredData = {
     'Tournament Organization',
     'Digital Scorekeeping',
     'Performance Analytics',
+    'Automatic Handicap Calculations',
+    'Schedule Generation',
+    'Financial Tracking',
   ],
 };
 
@@ -67,9 +65,21 @@ const organizationData = {
   name: 'Alley Admin',
   url: siteUrl.href,
   logo: new URL('/favicon.svg', siteUrl).href,
-  sameAs: ['https://github.com/jason-shprintz', 'https://jasonshprintz.com'],
+  sameAs: [
+    'https://github.com/jason-shprintz',
+    'https://jasonshprintz.com',
+    'https://alleyadmin.com',
+  ],
   description:
     'Alley Admin provides professional bowling league management software for bowling alleys, leagues, and tournaments.',
+};
+
+const websiteData = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Alley Admin',
+  url: siteUrl.href,
+  description: description,
 };
 
 /**
@@ -135,6 +145,7 @@ function safeJsonLd(data: object): string {
     <!-- Structured Data (JSON-LD) for AEO -->
     <script type="application/ld+json" set:html={safeJsonLd(structuredData)} />
     <script type="application/ld+json" set:html={safeJsonLd(organizationData)} />
+    <script type="application/ld+json" set:html={safeJsonLd(websiteData)} />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
